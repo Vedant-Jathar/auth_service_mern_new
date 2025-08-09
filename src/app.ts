@@ -29,7 +29,7 @@ app.use('/users', userRouter)
 
 // eslint-disable-next-line @typescript-eslint/require-await
 app.get('/', async (req, res, next) => {
-  res.send('Welcome to auth service')
+  res.send('Hey There...Welcome to auth service')
   const err = createHttpError(401, 'This route is not accessible')
   next(err)
 })
