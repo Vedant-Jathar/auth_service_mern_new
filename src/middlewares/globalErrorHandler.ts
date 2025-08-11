@@ -13,7 +13,7 @@ export const globalErrorHandler = (
   const isProduction = process.env.NODE_ENV === 'production'
   const statusCode = err.status || err.statusCode || 500
   const errorId = uuidv4()
-  const message = isProduction ? 'Internal server error' : err.message
+  // const message = isProduction ? 'Internal server error' : err.message
 
   logger.error(err.message, {
     id: errorId,
@@ -28,11 +28,11 @@ export const globalErrorHandler = (
       {
         id: errorId,
         type: err.name,
-        message: isProduction ? message : err.message,
+        message: isProduction ? err.message : err.message,
         statusCode,
         path: req.path,
         method: req.method,
-        stack: isProduction ? null : err.stack,
+        stack: isProduction ? err.stack : err.stack,
         location: 'server',
       },
     ],
