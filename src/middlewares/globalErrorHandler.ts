@@ -1,12 +1,14 @@
 import { HttpError } from 'http-errors'
 import { v4 as uuidv4 } from 'uuid'
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import logger from '../config/logger'
 
 export const globalErrorHandler = (
   err: HttpError,
   req: Request,
   res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  next: NextFunction,
 ) => {
   const isProduction = process.env.NODE_ENV === 'production'
   const statusCode = err.status || err.statusCode || 500
@@ -21,7 +23,7 @@ export const globalErrorHandler = (
     method: req.method,
   })
 
-  res.status(statusCode).json({
+  res.send(statusCode).json({
     errors: [
       {
         id: errorId,
