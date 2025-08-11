@@ -23,7 +23,7 @@ export const globalErrorHandler = (
     method: req.method,
   })
 
-  res.send(statusCode).json({
+  res.status(statusCode).json({
     errors: [
       {
         id: errorId,
