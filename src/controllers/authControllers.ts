@@ -62,7 +62,7 @@ export class AuthControllers {
         domain: Config.MAIN_DOMAIN,
         secure: true,
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'strict',
         maxAge: 1000 * 60 * 60,
       })
 
@@ -71,7 +71,7 @@ export class AuthControllers {
         domain: Config.MAIN_DOMAIN,
         secure: true,
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: 'strict',
         maxAge: 1000 * 60 * 60 * 24 * 365,
       })
 
@@ -128,7 +128,7 @@ export class AuthControllers {
       })
 
       res.cookie('accessToken', accessToken, {
-        sameSite: 'none',
+        sameSite: 'strict',
         path: '/',
         domain: Config.MAIN_DOMAIN,
         httpOnly: true,
@@ -137,7 +137,7 @@ export class AuthControllers {
       })
 
       res.cookie('refreshToken', refreshToken, {
-        sameSite: 'none',
+        sameSite: 'strict',
         domain: Config.MAIN_DOMAIN,
         httpOnly: true,
         path: '/',
@@ -201,7 +201,7 @@ export class AuthControllers {
       })
 
       res.cookie('accessToken', accessToken, {
-        sameSite: 'none',
+        sameSite: 'strict',
         httpOnly: true,
         domain: Config.MAIN_DOMAIN,
         path: '/',
@@ -210,7 +210,7 @@ export class AuthControllers {
       })
 
       res.cookie('refreshToken', refreshToken, {
-        sameSite: 'none',
+        sameSite: 'strict',
         secure: true,
         domain: Config.MAIN_DOMAIN,
         path: '/',
@@ -231,7 +231,7 @@ export class AuthControllers {
       )
 
       res.clearCookie('accessToken', {
-        sameSite: 'none',
+        sameSite: 'strict',
         domain: Config.MAIN_DOMAIN,
         httpOnly: true,
         path: '/',
@@ -244,7 +244,7 @@ export class AuthControllers {
         domain: Config.MAIN_DOMAIN,
         httpOnly: true,
         path: '/',
-        sameSite: 'none',
+        sameSite: 'strict',
         maxAge: 1000 * 60 * 60 * 24 * 365,
       })
 
