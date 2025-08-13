@@ -59,15 +59,19 @@ export class AuthControllers {
 
       res.cookie('accessToken', accessToken, {
         domain: Config.MAIN_DOMAIN,
+        path: '/',
+        secure: true,
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'none',
         maxAge: 1000 * 60 * 60,
       })
 
       res.cookie('refreshToken', refreshToken, {
         domain: Config.MAIN_DOMAIN,
+        path: '/',
+        secure: true,
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'none',
         maxAge: 1000 * 60 * 60 * 24 * 365,
       })
 
@@ -124,15 +128,19 @@ export class AuthControllers {
       })
 
       res.cookie('accessToken', accessToken, {
-        sameSite: 'strict',
+        sameSite: 'none',
+        path: '/',
         httpOnly: true,
+        secure: true,
         maxAge: 24 * 60 * 60 * 1000,
         domain: Config.MAIN_DOMAIN,
       })
 
       res.cookie('refreshToken', refreshToken, {
-        sameSite: 'strict',
+        sameSite: 'none',
         httpOnly: true,
+        path: '/',
+        secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 365,
         domain: Config.MAIN_DOMAIN,
       })
@@ -193,14 +201,18 @@ export class AuthControllers {
       })
 
       res.cookie('accessToken', accessToken, {
-        sameSite: 'strict',
+        sameSite: 'none',
         httpOnly: true,
+        path: '/',
+        secure: true,
         maxAge: 24 * 60 * 60 * 1000,
         domain: Config.MAIN_DOMAIN,
       })
 
       res.cookie('refreshToken', refreshToken, {
-        sameSite: 'strict',
+        sameSite: 'none',
+        secure: true,
+        path: '/',
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 365,
         domain: Config.MAIN_DOMAIN,
@@ -217,8 +229,23 @@ export class AuthControllers {
       await this.tokenService.deleteOldRefreshTokenFromDatabase(
         Number(req.auth.id),
       )
-      res.clearCookie('accessToken')
-      res.clearCookie('refreshToken')
+
+      res.clearCookie('accessToken', {
+        sameSite: 'none',
+        httpOnly: true,
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000,
+        domain: Config.MAIN_DOMAIN,
+      })
+
+      res.clearCookie('refreshToken', {
+        domain: Config.MAIN_DOMAIN,
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none',
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+      })
+
       res.json({})
     } catch (error) {
       next(error)
