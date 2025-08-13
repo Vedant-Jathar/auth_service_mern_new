@@ -7,7 +7,6 @@ import { JwtPayload } from 'jsonwebtoken'
 import { TokenService } from '../services/tokenService'
 import createHttpError from 'http-errors'
 import bcrypt from 'bcryptjs'
-import { Config } from '../config'
 // import { registerSchema } from '../validators/registerValidator'
 
 export class AuthControllers {
@@ -58,7 +57,6 @@ export class AuthControllers {
       })
 
       res.cookie('accessToken', accessToken, {
-        domain: Config.MAIN_DOMAIN,
         path: '/',
         secure: true,
         httpOnly: true,
@@ -67,7 +65,6 @@ export class AuthControllers {
       })
 
       res.cookie('refreshToken', refreshToken, {
-        domain: Config.MAIN_DOMAIN,
         path: '/',
         secure: true,
         httpOnly: true,
@@ -133,7 +130,6 @@ export class AuthControllers {
         httpOnly: true,
         secure: true,
         maxAge: 24 * 60 * 60 * 1000,
-        domain: Config.MAIN_DOMAIN,
       })
 
       res.cookie('refreshToken', refreshToken, {
@@ -142,7 +138,6 @@ export class AuthControllers {
         path: '/',
         secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 365,
-        domain: Config.MAIN_DOMAIN,
       })
 
       this.logger.info('user logged in successfully', {
@@ -206,7 +201,6 @@ export class AuthControllers {
         path: '/',
         secure: true,
         maxAge: 24 * 60 * 60 * 1000,
-        domain: Config.MAIN_DOMAIN,
       })
 
       res.cookie('refreshToken', refreshToken, {
@@ -215,7 +209,6 @@ export class AuthControllers {
         path: '/',
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 365,
-        domain: Config.MAIN_DOMAIN,
       })
 
       res.json({})
@@ -235,11 +228,9 @@ export class AuthControllers {
         httpOnly: true,
         secure: true,
         maxAge: 24 * 60 * 60 * 1000,
-        domain: Config.MAIN_DOMAIN,
       })
 
       res.clearCookie('refreshToken', {
-        domain: Config.MAIN_DOMAIN,
         secure: true,
         httpOnly: true,
         sameSite: 'none',
